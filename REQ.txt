@@ -1,0 +1,26 @@
+-- Requirements --
+
+- Indexability
+- Fault Toleratability
+- Distributability
+- High-Throughput
+
+__Indexability__
+- Entities Being Indexed can be anything textual
+- Entities Being Indexed are primary keyed separately into 'Index Key'
+- Fuzzy Search Retrieval of Relevant Entities with Relevance Scores.
+
+__Fault Tolerability__
+- Tunable Number of Replicas for a Master Sharded Index
+- Increasing Distance between Master Shards and Slave Shards
+- Durable Writes by Logging Unindexed Changes
+
+__Distributability__
+- Uniform Distribution of Load and Data Presence (Consistent Hashing with 'Index Key')
+- Eventual Consitency with Sharded Replicas
+
+__High-Throughput__
+- Appropriate number of Shard Indexes
+- Efficient Disk Writes from Buffers and Flushing
+- Faster PreProcessing
+- Efficient Searching through Node Lookup tables

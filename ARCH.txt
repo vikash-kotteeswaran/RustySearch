@@ -1,0 +1,30 @@
+-- Architecture --
+
+- Index Cluster
+  - Index Node
+    - Sharded Index
+      - Master
+      - Slave
+      - Coordinator
+    - Node Lookup Table
+
+__Sharded Index__
+- Radix Trie
+- Writes are directed to Master
+- Reads are served from both Master and Slave
+
+__Coordinator Sharded Index__
+- Coordinator is in itself/serves as a Master Sharded Index
+- Receives the Search request
+- Finds relevant Index Nodes from Node Lookup Table
+- Aggregates results from relevant nodes and sends as Response
+- Coordindator is switched to another Master Shard if the current Coordinator is not available
+
+__Index Node__
+- Consists of a Master Sharded Index and Several Replicas of other Master Sharded Indexes
+
+__Node Lookup Table__
+- Same Node Lookup Table is present in each of the Index Nodes to identify Relevant Nodes around a particular node.
+
+__Index Cluster__
+- Consists of all the Index Nodes

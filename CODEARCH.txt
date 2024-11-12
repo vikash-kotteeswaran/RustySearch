@@ -1,0 +1,32 @@
+-- Code Architecture --
+
+- Components
+    - Index
+    - Shard
+    - Node
+    - Cluster (Imaginary - Non Codeable)
+    - GateWay
+    - NodeIdentityTable
+
+- Services
+    - IndexKeyGenerationService
+    - ConsistentHashService
+    - ComponentDiscoveryService
+    - IndexPreProcessService
+    - PriorIndexLoggingService
+    - IndexProcessService
+    - RelevanceScoreService
+
+- Managers
+    - ComponentIdentityManager
+        - ConsistentHashService
+        - ComponentDiscoveryService
+    - IndexManager
+        - IndexPreProcessService
+        - PriorIndexLoggingService
+        - IndexProcessService
+    - RetrievalManager
+        - RelevanceScoreService
+
+- Daemons
+    - ComponentIdentityManager

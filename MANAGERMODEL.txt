@@ -1,0 +1,31 @@
+-- Helpers --
+
+__ComponentIdentityManager__
+- Attributes
+    - GroupVsComponentMap (HashMap<String, List<Node>>) [For Components other than Node]
+    - Components (List<ServerComponent>)
+- Methods
+    - BroadCast [To broadcast info to the Components in the network]
+    - GetComponentsForGroup
+    - CheckForInfo [Listens to broadcasted info from other Components] [Listens to New Coordinator Entry]
+    - PurgeInActiveComponents [Runs Periodically]
+    - CheckHealthOfAll [Runs Periodically]
+    - Run (runs CheckForInfo, CheckHealthOfAll & PurgeInActiveComponents in a Daemon thread)
+- Services
+    - ConsistentHashService
+    - ComponentDiscoveryService
+
+__IndexManager__
+- Methods
+    - Write [PriorIndexLoggingService.LogRawText -> IndexPreProcessService.Process -> IndexProcessService.IndexToShard]
+- Services
+    - IndexPreProcessService
+        - FilterCharacters
+        - Tokenize
+        - FilterTokens
+        - Process [FilterCharacters -> Tokenize -> FilterTokens]
+    - PriorIndexLoggingService
+        - LogRawText
+    - IndexProcessService
+        - FindShardForText
+        - IndexToShard [runs FindShardForText]

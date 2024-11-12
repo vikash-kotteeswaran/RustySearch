@@ -1,0 +1,52 @@
+-- COMPMODEL --
+
+__Bean__ (Base Class)
+- Attributes
+    - CreatedOn (Date)
+
+__Component__ (Base Class)
+- Attributes
+    - CreatedOn (Date)
+
+__ServerComponent__ (Extends Component)
+- Attributes
+    - Status
+    - CompIdentMgr (ComponentIdentityManager)
+
+__Index__ (Extends Bean)
+- Attribute
+    - TextId (Primary Key)
+    - Token
+- Methods
+    - Serialize
+    - DeSerialize
+
+__Shard__ (Extends Component)
+- Attribute
+    - Id (Primary Key)
+    - NodeId (Foreign Key)
+    - GroupName
+    - Radix Tree with 'Index' instances as Elements
+- Methods
+    - IndexText
+    - QueryText
+    - Serialize
+    - DeSerialize
+
+__Node__ (Extends ServerComponent)
+- Attribute
+    - Id (Primary Key)
+    - Shards (List<Shard>)
+    - Type (DataOnly | DataAndCoordinating | CoordinatingOnly)
+    - Address
+- Method
+    - BroadCastToOtherNodes [Uses CompIdentMgr.BroadCast] [To Broadcast Node Type, Shard Groups Present]
+    - GetRelevantNodesForQuery
+    - GetNodeToIndex
+
+__GateWay__ (Extends ServerComponent)
+- Attribute
+    - Coordinators (List<Node>)
+    - CoordinatorsTraffic (HashMap<NodeId, Traffic>)
+- Method
+    - SendRequestToAnyCoordinator

@@ -1,0 +1,22 @@
+-- Implementation --
+
+- Writes
+    - Talk to Coordinator
+    - Coordinator generates Index Key
+    - Coordinator identifies Appropriate Node (Shard) using Index Key
+    - Appropriate Shard PreProcesses and Indexes in them
+    - Appropriate Shard modifies Node Lookup Table if Neccessary and broadcasts the Patch to other Nodes
+    - Returns back to Coordinator and Coordinator sends a response
+
+- Reads
+    - Talk to Coordinator
+    - Get Relevant Nodes from Node Lookup Table
+    - Send the Search Words to the Relevant Nodes
+    - Relevant Nodes gets the relevant 'Index Keys', computes Relevance Scores and returns to Coordinator
+    - Coordinator aggregates the results and sends back as Response
+
+
+__PreProcess__
+- Character Filters: filters out unwanted characters
+- Tokenization: seperates the text into individual words/tokens
+- Token Prcessing: Changing case, stemming and synonyms
